@@ -17,8 +17,10 @@ brew install --cask amethyst
 brew install lazygit
 brew install lazydocker
 brew install neovim
+brew install starship
 
 # Move the relevant config
 echo "installing configs"
 cp ./config/.wezterm.lua $HOME/.wezterm.lua
 cp -r ./config/nvim $HOME/.config/nvim
+cp ./config/.zshrc $HOME/.zshrc

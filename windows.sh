@@ -16,8 +16,10 @@ choco install glazewm -y
 choco install lazygit
 choso install lazydocker
 choco install neovim
+choco install starship
 
 # Move the relevant config
 echo "Installing configs"
 cp ./config/.wezterm.lua %USERPROFILE%/.wezterm.lua
 cp -r ./config/nvim %USERPROFILE%/AppData/Local/nvim
+cp ./config/.zshrc %USERPROFILE%/.zshrc
