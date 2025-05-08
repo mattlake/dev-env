@@ -17,6 +17,7 @@ choco install lazygit
 choso install lazydocker
 choco install neovim
 choco install starship
+choco install lsd
 
 # Move the relevant config
 echo "Installing configs"

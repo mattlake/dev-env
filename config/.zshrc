@@ -1,5 +1,5 @@
 # Aliases
-alias ll="ls -la"
+alias ll="lsd -la"
 alias ..="cd .."
 
 alias lzg="lazygit"

@@ -20,14 +20,16 @@ elif [[ "$OS" == CYGWYN* || "$OS" == MINGW* ]]; then
 fi
 
 # Apps
-# wezterm - done
-# tiling manager
+# wezterm -  insallwd but needs config
+# tiling manager-  insallwd but needs config
 # lazygit - done
 # lazydocker - done
-# fireship
+# fireship-  insallwd but needs config
 # neovim -done
 # fzf
 # zoxide
 # zsh cofig
+# lsd-  insallwd but needs config
+# tldr
 
 

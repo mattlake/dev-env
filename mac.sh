@@ -18,12 +18,10 @@ brew install lazygit
 brew install lazydocker
 brew install neovim
 brew install starship
+brew install lsd
 
 # Move the relevant config
 echo "installing configs"
 cp ./config/.wezterm.lua $HOME/.wezterm.lua
 cp -r ./config/nvim $HOME/.config/nvim
 cp ./config/.zshrc $HOME/.zshrc
-
-# Refresh
-source $HOME/.zshrc
