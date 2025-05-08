@@ -19,4 +19,13 @@ elif [[ "$OS" == CYGWYN* || "$OS" == MINGW* ]]; then
     ecit 1
 fi
 
+# Apps
+# wezterm
+# tiling manager
+# lazygit
+# lazydocker
+# fireship
+# neovim
+#
+
 

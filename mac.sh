@@ -1,15 +1,5 @@
 #!/bin/bash
 
-#  Apps
-#  package manager
-#  wezterm
-#  tiling manager (amethyst)
-
-#  Configs
-#  wezterm
-#  tiling manager (amethyst)
-
-
 echo "Checking homebrew installation"
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -24,9 +14,11 @@ fi
 echo "installing missing applications"
 brew install --cask wezterm
 brew install --cask amethyst
-
-
+brew install lazygit
+brew install lazydocker
+brew install neovim
 
 # Move the relevant config
 echo "installing configs"
 cp ./config/.wezterm.lua $HOME/.wezterm.lua
+cp -r ./config/nvim $HOME/.config/nvim

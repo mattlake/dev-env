@@ -1,14 +1,5 @@
 #!/bin/bash
 
-#  Apps
-#  package manager
-#  wezterm
-#  tiling manager
-
-#  Configs
-#  wezterm
-#  tiling manager
-
 echo "Checking choco installation"
 choco -?
 if [[ $? != 0 ]] ; then
@@ -20,7 +11,13 @@ fi
 # Start installing apps
 echo "Installing missing applications"
 choco install wezterm -y
+choco install zebar -y
+choco install glazewm -y
+choco install lazygit
+choso install lazydocker
+choco install neovim
 
 # Move the relevant config
 echo "Installing configs"
 cp ./config/.wezterm.lua %USERPROFILE%/.wezterm.lua
+cp -r ./config/nvim %USERPROFILE%/AppData/Local/nvim
