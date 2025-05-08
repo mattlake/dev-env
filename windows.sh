@@ -23,3 +23,6 @@ echo "Installing configs"
 cp ./config/.wezterm.lua %USERPROFILE%/.wezterm.lua
 cp -r ./config/nvim %USERPROFILE%/AppData/Local/nvim
 cp ./config/.zshrc %USERPROFILE%/.zshrc
+
+# Referesh
+source %USERPROFILE%/.zshrc
