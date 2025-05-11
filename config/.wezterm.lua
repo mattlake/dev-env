@@ -49,6 +49,10 @@ config.keys = {
 			end),
 		}),
 	},
+
+	-- Map copy and paste to match vim bindings
+	{ key = "c", mods = "CTRL", action = wezterm.action.CopyTo("ClipboardAndPrimarySelection") },
+	{ key = "p", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") },
 }
 
 -- return the config
