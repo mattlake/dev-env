@@ -5,3 +5,8 @@ command_timeout = 1000
 
 [character]
 success_symbol = '[->](bold green)'
+
+[git_status]
+staged = "[+](green)"
+untracked = "[?](red)"
+modified = "[*](yellow)"
