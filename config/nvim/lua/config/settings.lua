@@ -1,4 +1,6 @@
 vim.g.have_nerd_font = true
+vim.opt.title = true
+vim.opt.titlestring = [[Nvim: %t]]
 
 -- Show relative line numbers
 vim.opt.number = true
@@ -61,3 +63,5 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 
 vim.opt.mouse = "a" -- Enable the mouse for rezing windows etc
+
+vim.diagnostic.setqflist()
