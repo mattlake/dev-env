@@ -9,7 +9,7 @@ vim.opt.scrolloff = 999
 
 -- share the clipboard
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+        vim.opt.clipboard = "unnamedplus"
 end)
 
 vim.opt.breakindent = true
@@ -43,11 +43,11 @@ vim.opt.cursorline = true
 
 -- highlight yanks
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking text",
-	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+        desc = "Highlight when yanking text",
+        group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+        callback = function()
+                vim.highlight.on_yank()
+        end,
 })
 
 -- Hide the status line as we are using mini-statusline
@@ -65,3 +65,4 @@ vim.opt.autoindent = true
 vim.opt.mouse = "a" -- Enable the mouse for rezing windows etc
 
 vim.diagnostic.setqflist()
+
