@@ -2,7 +2,7 @@
 
 format = """
 $os\
-$username (red)\
+$username\
 [>](fg:red)\
 $directory\
 [>](fg:yellow)\
