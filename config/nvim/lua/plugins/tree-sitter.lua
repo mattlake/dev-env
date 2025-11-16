@@ -12,6 +12,7 @@ return {
 				"vimdoc",
 				"query",
 				"heex",
+				"go",
 				-- "javascript",
 				-- "html",
 				-- "css",
