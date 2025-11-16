@@ -6,15 +6,15 @@ return {
 
 		configs.setup({
 			ensure_installed = {
-				"c_sharp",
+				-- "c_sharp",
 				"lua",
 				"vim",
 				"vimdoc",
 				"query",
 				"heex",
-				"javascript",
-				"html",
-				"css",
+				-- "javascript",
+				-- "html",
+				-- "css",
 			},
 			sync_install = false,
 			auto_install = true,
