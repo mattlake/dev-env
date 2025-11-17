@@ -6,7 +6,7 @@ return {
 
 		configs.setup({
 			ensure_installed = {
-				-- "c_sharp",
+				"c_sharp",
 				"lua",
 				"vim",
 				"vimdoc",
