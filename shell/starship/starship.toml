@@ -5,13 +5,12 @@ $os\
 $username\
 [>](fg:red)\
 $directory\
-[>](fg:yellow)\
+[>](fg:peach)\
 $git_branch\
 $git_status\
-[>](fg:green)\
-$conda\
-[>](fg:lavender)\
+[>](fg:yellow)\
 $time\
+[>](fg:lavender)\
 $cmd_duration\
 $line_break\
 $character"""
@@ -48,7 +47,7 @@ RedHatEnterprise = "󱄛"
 show_always = true
 style_user = "fg:red"
 style_root = "fg:red"
-format = '[ $user]($style)'
+format = '[ $user ]($style)'
 
 [directory]
 style = "fg:peach"
@@ -135,7 +134,7 @@ style = "fg:lavender"
 format = '[[  $time ](fg:lavender)]($style)'
 
 [line_break]
-disabled = true
+disabled = false
 
 [character]
 disabled = false
@@ -148,7 +147,7 @@ vimcmd_visual_symbol = '[❮](bold fg:yellow)'
 
 [cmd_duration]
 show_milliseconds = true
-format = " in $duration "
+format = "  in $duration "
 style = "bg:lavender"
 disabled = false
 show_notifications = true
