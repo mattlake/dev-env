@@ -72,6 +72,7 @@ alias jj='zi'
 
 alias lzg='lazygit'
 alias lzd='lazydocker'
+alias fzv='nvim $(fzf)'
 
 # Tools
 eval "$(zoxide init zsh)"
