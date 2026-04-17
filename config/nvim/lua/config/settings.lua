@@ -72,3 +72,4 @@ vim.lsp.enable("vtsls")
 -- If not in package.json, from the Angular project root run:
 --   npm install --no-save --no-package-lock --legacy-peer-deps @angular/language-service@<version>
 vim.lsp.enable("angularls")
+vim.lsp.enable("yamlls")

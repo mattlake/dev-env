@@ -7,6 +7,7 @@ return {
 				"gopls",
 				"vtsls",
 				"angularls",
+				"yamlls",
 			},
 		},
 		dependencies = {
