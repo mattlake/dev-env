@@ -8,6 +8,7 @@ return {
 				"vtsls",
 				"angularls",
 				"yamlls",
+				"omnisharp",
 			},
 		},
 		dependencies = {
