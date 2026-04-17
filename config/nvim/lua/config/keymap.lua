@@ -17,6 +17,11 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>wx", "<C-w>c", { desc = "Close current split" })
+vim.keymap.set("n", "<leader>we", "<C-w>=", { desc = "Equalise split sizes" })
+
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
