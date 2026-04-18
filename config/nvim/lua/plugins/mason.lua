@@ -8,7 +8,6 @@ return {
 				"vtsls",
 				"angularls",
 				"yamlls",
-				"omnisharp",
 			},
 		},
 		dependencies = {
@@ -27,7 +26,7 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		opts = {
-			ensure_installed = { "prettierd", "netcoredbg", "js-debug-adapter" },
+			ensure_installed = { "prettierd", "netcoredbg", "js-debug-adapter", "omnisharp" },
 		},
 	},
 }
