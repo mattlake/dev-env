@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+    branch = "master",
 	config = function()
 		local configs = require("nvim-treesitter.configs")
 
@@ -13,9 +14,11 @@ return {
 				"query",
 				"heex",
 				"go",
-				-- "javascript",
-				-- "html",
-				-- "css",
+				"typescript",
+				"javascript",
+				"yaml",
+				"markdown",
+				"markdown_inline",
 			},
 			sync_install = false,
 			auto_install = true,

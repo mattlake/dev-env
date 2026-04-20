@@ -66,4 +66,10 @@ vim.opt.mouse = "a" -- Enable the mouse for rezing windows etc
 
 vim.diagnostic.setqflist()
 
-vim.lsp.enable("roslyn_ls")
+vim.lsp.enable("omnisharp")
+vim.lsp.enable("vtsls")
+-- angularls requires @angular/language-service in the project's node_modules.
+-- If not in package.json, from the Angular project root run:
+--   npm install --no-save --no-package-lock --legacy-peer-deps @angular/language-service@<version>
+vim.lsp.enable("angularls")
+vim.lsp.enable("yamlls")
