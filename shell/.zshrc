@@ -1,80 +1,43 @@
-# Performance optimizations
-DISABLE_AUTO_UPDATE="true"
-DISABLE_MAGIC_FUNCTIONS="true"
-DISABLE_COMPFIX="true"
+# --- zinit ---
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 
-# Cache completions aggressively
-autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
-    compinit
-else
-    compinit -C
-fi
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light Aloxaf/fzf-tab
+zinit light jeffreytse/zsh-vi-mode
 
-export ZSH="$HOME/.oh-my-zsh"
+# --- Environment ---
+export EDITOR=nvim
+export VISUAL=nvim
+export TERM=xterm-256color
+export EZA_CONFIG_DIR="$HOME/.config/eza"
 
-ZSH_THEME="spaceship"
-
-plugins=(
-    git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    zsh-vi-mode
-    docker
-    docker-compose
-)
-
-source $ZSH/oh-my-zsh.sh
-
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#663399,standout"
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
-ZSH_AUTOSUGGEST_USE_ASYNC=1
-
-# Spaceship settings
-SPACESHIP_PROMPT_ASYNC=true
-SPACESHIP_PROMPT_ADD_NEWLINE=true
-SPACESHIP_CHAR_SYMBOL="⚡"
-
-# Minimal spaceship sections for performance
-SPACESHIP_PROMPT_ORDER=(
-    time
-    user
-    dir
-    git
-    line_sep
-    char
-)
-
-### ALIASES ###
-
-# config helpers
-alias zshrc='nvim ~/.zshrc'
-alias src='source ~/.zshrc'
-
-# Navigation
+# --- Shell options ---
 setopt autocd
-autoload -U compinit; compinit
-alias cd='z'
+setopt nocaseglob
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# --- fzf ---
+source /usr/share/doc/fzf/examples/key-bindings.zsh 2>/dev/null
+source /usr/share/doc/fzf/examples/completion.zsh 2>/dev/null
+
+# --- zoxide ---
+eval "$(zoxide init zsh)"
+alias j=z
+alias jj=zi
+
+# --- Aliases ---
+alias ll='eza -lah --icons=always'
+alias l='eza -lah --icons=always'
+alias lt='eza -lahT --icons=always'
+alias ..='cd ..'
 alias c='clear'
-alias l='eza -laH --icons'
-alias lt='eza -laHT --icons'
-alias la='ls -lAh'
-alias ll='ls -lh'
-alias ls='ls -G'
-alias lsa='ls -lah'
-
-#fzf bindings
-source <(fzf --zsh)
-
-# zoxide aliases
-alias j='z'
-alias jj='zi'
-
 alias lzg='lazygit'
 alias lzd='lazydocker'
 alias fzv='nvim $(fzf)'
+alias pwgen='pwgen -s 32 1'
 
-# Tools
-eval "$(zoxide init zsh)"
+# --- Starship prompt ---
+eval "$(starship init zsh)"
 
-. "$HOME/.local/bin/env"
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

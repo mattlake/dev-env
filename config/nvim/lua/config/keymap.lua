@@ -1,22 +1,11 @@
 vim.keymap.set("n", "-", "<cmd>Oil --float<CR>", { desc = "Open parent directory in Oil file explorer" })
 
--- Diagnostics
 vim.keymap.set("n", "gl", function()
 	vim.diagnostic.open_float()
 end, { desc = "Open diagnostics in a float" })
 
--- Code formatting
-vim.keymap.set("n", "<leader>cf", function()
-	require("conform").format({ lsp_format = "fallback" })
-end, { desc = "Format code in current file" })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlighting" })
 
--- Clear highlighting on escape in normal mode
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })
 vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" })
 vim.keymap.set("n", "<leader>wx", "<C-w>c", { desc = "Close current split" })
