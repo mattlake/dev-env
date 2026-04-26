@@ -6,6 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"nsidorenco/neotest-vstest",
+			"mfussenegger/nvim-dap",
 		},
 		keys = {
 			{ "<leader>tr", function() require("neotest").run.run() end, desc = "Run nearest test" },
@@ -18,7 +19,14 @@ return {
 		config = function()
 			require("neotest").setup({
 				adapters = {
-					require("neotest-vstest"),
+					require("neotest-vstest")({
+				dap_settings = {
+					type = "coreclr",
+					name = "netcoredbg - attach",
+					request = "attach",
+					justMyCode = false,
+				},
+			}),
 				},
 			})
 		end,
