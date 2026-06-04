@@ -26,7 +26,7 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		opts = {
-			ensure_installed = { "prettierd", "netcoredbg", "js-debug-adapter", "omnisharp" },
+			ensure_installed = { "prettierd", "netcoredbg", "js-debug-adapter", "roslyn" },
 		},
 	},
 }
