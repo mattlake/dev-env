@@ -6,11 +6,23 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 
+# --- PATH ---
+export PATH="$HOME/.local/bin:$HOME/scripts:$PATH"
+
 # --- Environment ---
 export EDITOR=nvim
 export VISUAL=nvim
 export TERM=xterm-256color
 export EZA_CONFIG_DIR="$HOME/.config/eza"
+
+# --- History ---
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt share_history
+setopt inc_append_history
 
 # --- Shell options ---
 setopt autocd
@@ -41,3 +53,14 @@ alias pwgen='pwgen -s 32 1'
 eval "$(starship init zsh)"
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# Terminal tab titles: command name while running, current dir when idle
+function preexec() {
+	printf '\e]0;%s\a' "${1%% *}"
+}
+function precmd() {
+	print -Pn '\e]0;%1~\a'
+}
+
+# Fix Claude Code rendering corruption in WezTerm (alternate screen buffer mode)
+export CLAUDE_CODE_NO_FLICKER=1
