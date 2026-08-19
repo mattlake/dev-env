@@ -6,6 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"nsidorenco/neotest-vstest",
+			"fredrikaverpil/neotest-golang",
 			"mfussenegger/nvim-dap",
 		},
 		keys = {
@@ -27,6 +28,19 @@ return {
 					justMyCode = false,
 				},
 			}),
+					require("neotest-golang")({
+						go_test_args = { "-v", "-race", "-count=1" },
+						-- "manual" rather than the "dap-go" default: dap.adapters.delve and
+						-- dap.configurations.go are already defined in plugins/dap.lua, so
+						-- reuse them instead of pulling in leoluz/nvim-dap-go.
+						dap_mode = "manual",
+						dap_manual_config = {
+							name = "Debug go test (neotest)",
+							type = "delve",
+							request = "launch",
+							mode = "test",
+						},
+					}),
 				},
 			})
 		end,

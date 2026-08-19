@@ -98,6 +98,50 @@ return {
 				},
 			}
 			dap.configurations.javascript = dap.configurations.typescript
+
+			-- Install delve from Homebrew on macOS, NOT mason: dlv needs task_for_pid
+			-- to control a process, which requires a codesigned binary. Mason builds it
+			-- with `go install`, unsigned, and it fails at launch. On Windows there is
+			-- no signing requirement, so `go install .../cmd/dlv@latest` is fine there.
+			-- Either way dlv is resolved from PATH.
+			dap.adapters.delve = {
+				type = "server",
+				port = "${port}",
+				executable = {
+					command = "dlv",
+					args = { "dap", "-l", "127.0.0.1:${port}" },
+					-- dlv must not be detached on Windows or it never terminates.
+					detached = vim.fn.has("win32") == 0,
+				},
+			}
+
+			-- NOTE: breakpoints inside a cgo/OpenGL render loop stall the window and
+			-- the OS may mark the app unresponsive. Use these for game logic, collision,
+			-- level loading and tests; use an on-screen overlay for per-frame problems.
+			dap.configurations.go = {
+				{
+					type = "delve",
+					name = "Debug package",
+					request = "launch",
+					program = "${fileDirname}",
+				},
+				{
+					type = "delve",
+					name = "Debug test",
+					request = "launch",
+					mode = "test",
+					program = "${fileDirname}",
+				},
+				{
+					type = "delve",
+					name = "Attach to process",
+					request = "attach",
+					mode = "local",
+					processId = function()
+						return require("dap.utils").pick_process()
+					end,
+				},
+			}
 		end,
 	},
 }

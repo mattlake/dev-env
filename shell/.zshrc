@@ -12,6 +12,15 @@ export VISUAL=nvim
 export TERM=xterm-256color
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 
+# --- PATH ---
+# /etc/paths.d/go (root-owned) puts the stale /usr/local/go install on PATH.
+# Homebrew's go at /usr/local/bin currently wins by ordering only, so drop the
+# stale entry to stop a brew unlink silently downgrading the toolchain.
+path=(${path:#/usr/local/go/bin})
+
+# `go install` targets $GOPATH/bin (dlv, goimports, gofumpt, air, mockgen)
+export PATH="$HOME/go/bin:$PATH"
+
 # --- Shell options ---
 setopt autocd
 setopt nocaseglob
