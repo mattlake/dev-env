@@ -94,6 +94,22 @@ if ! $LINKS_ONLY; then
     else
         printf '      ok: already installed\n'
     fi
+
+    info "herdr (not a brew formula)"
+    if ! command -v herdr >/dev/null && [[ ! -x $HOME/.local/bin/herdr ]]; then
+        run /bin/sh -c "$(curl -fsSL https://herdr.dev/install.sh)"
+    else
+        printf '      ok: already installed\n'
+    fi
+
+    # Claude Code native build, self-updating. Cask was dropped in favour of
+    # this because the native installer keeps itself current without brew.
+    info "claude (native, not a brew cask)"
+    if ! command -v claude >/dev/null && [[ ! -x $HOME/.local/bin/claude ]]; then
+        run /bin/bash -c "$(curl -fsSL https://claude.ai/install.sh)"
+    else
+        printf '      ok: already installed\n'
+    fi
 fi
 
 info "Symlinks: shared"
@@ -101,6 +117,9 @@ link shared/zsh/.zshrc                "$HOME/.zshrc"
 link shared/nvim                      "$HOME/.config/nvim"
 link shared/wezterm/.wezterm.lua      "$HOME/.wezterm.lua"
 link shared/jetbrains/.ideavimrc      "$HOME/.ideavimrc"
+link shared/herdr/config.toml         "$HOME/.config/herdr/config.toml"
+link shared/git/.gitconfig            "$HOME/.gitconfig"
+link shared/git/ignore                "$HOME/.config/git/ignore"
 
 info "Symlinks: macOS"
 link macos/aerospace/aerospace.toml   "$HOME/.config/aerospace/aerospace.toml"
@@ -170,4 +189,5 @@ Done. Remaining manual steps, which cannot be scripted:
   * Machine-local overrides are intentionally untracked. Create them if wanted:
       ~/.zshrc.local          sourced at the end of .zshrc
       ~/.wezterm.local.lua    see shared/wezterm/.wezterm.local.lua.example
+      ~/.gitconfig.local      required for [user] name/email; included by .gitconfig
 EOF

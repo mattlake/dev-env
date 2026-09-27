@@ -74,6 +74,9 @@ Write-Info 'Symlinks: shared'
 New-ConfigLink 'shared\nvim'                 (Join-Path $env:LOCALAPPDATA 'nvim')
 New-ConfigLink 'shared\wezterm\.wezterm.lua' (Join-Path $HOME '.wezterm.lua')
 New-ConfigLink 'shared\jetbrains\.ideavimrc' (Join-Path $HOME '.ideavimrc')
+New-ConfigLink 'shared\herdr\config.toml'    (Join-Path $env:APPDATA 'herdr\config.toml')
+New-ConfigLink 'shared\git\.gitconfig'       (Join-Path $HOME '.gitconfig')
+New-ConfigLink 'shared\git\ignore'           (Join-Path $HOME '.config\git\ignore')
 
 Write-Info 'Symlinks: Windows'
 $wtDir = Join-Path $env:LOCALAPPDATA 'Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState'
@@ -91,7 +94,6 @@ Done, as far as this script goes. Still to capture from this machine:
   * glazewm       ~/.glaze-wm/config.yaml  -> windows/glazewm/
   * zebar         ~/.glzr/zebar/           -> windows/zebar/
   * flow launcher %APPDATA%\FlowLauncher\  -> windows/flow-launcher/
-  * herdr         %APPDATA%\herdr\config.toml -> shared/herdr/
   * a winget or scoop manifest to match macos/Brewfile
 
 WSL shares the shared/ tree: run install/macos.sh --links from inside WSL,

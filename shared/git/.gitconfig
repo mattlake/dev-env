@@ -1,0 +1,21 @@
+# Public git config. Machine-specific identity lives in ~/.gitconfig.local,
+# which is intentionally untracked -- see install/macos.sh for the reminder.
+
+[core]
+	editor = nvim
+	excludesfile = ~/.config/git/ignore
+
+[rerere]
+	enabled = true
+
+[diff]
+	algorithm = histogram
+
+[merge]
+	conflictStyle = zdiff3
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[include]
+	path = ~/.gitconfig.local

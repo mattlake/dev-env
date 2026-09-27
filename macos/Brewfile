@@ -52,6 +52,8 @@ brew "hugo"
 brew "kdoctor"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Terminal UI for docker
+brew "lazydocker"
 # Next-gen compiler infrastructure
 brew "llvm"
 # Parsing Expression Grammars For Lua
@@ -72,8 +74,6 @@ brew "p7zip"
 brew "php"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Terminal multiplexer
-brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Parser generator tool
@@ -92,8 +92,6 @@ brew "felixkratz/formulae/borders"
 cask "aerospace"
 # Anthropic's official Claude AI desktop app
 cask "claude"
-# Terminal-based AI coding assistant
-cask "claude-code"
 # Developer platform
 cask "dotnet-sdk"
 # UI toolkit for building applications for mobile, web and desktop
