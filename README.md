@@ -75,12 +75,12 @@ cannot be fully captured here. Sign in to restore extensions and hotkeys.
   winget or scoop manifest to match `macos/Brewfile`.
 - `install/windows.ps1` has never been executed. It was written on the Mac,
   where there is no PowerShell to even parse it.
-- AeroSpace never triggers SketchyBar's `aerospace_workspace_change` event:
-  `sketchybarrc` subscribes to it but `aerospace.toml` has no
-  `exec-on-workspace-change`, so workspace indicators do not update. The bar
-  also has no `start-at-login`.
 - `borders` (JankyBorders) is installed and in the Brewfile but nothing
-  launches it and it has no config.
+  launches it and it has no config. It draws a highlight around the focused
+  window, which is what GlazeWM gives you on Windows and AeroSpace does not.
+- `start-at-login = true` is set but unverified: AeroSpace registers itself
+  through SMAppService rather than a launchd plist, so confirming it needs a
+  reboot.
 - `herdr` is not set up on the Mac yet. Its config is
   `~/.config/herdr/config.toml` (`%APPDATA%\herdr\config.toml` on Windows) and
   holds no secrets, so it belongs in `shared/` once written.

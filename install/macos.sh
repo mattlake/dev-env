@@ -107,6 +107,20 @@ link macos/aerospace/aerospace.toml   "$HOME/.config/aerospace/aerospace.toml"
 link macos/sketchybar                 "$HOME/.config/sketchybar"
 
 info "Services"
+# AeroSpace has start-at-login in its config, but that only takes effect once
+# the app has run at least once to register itself.
+if [[ -d /Applications/AeroSpace.app ]]; then
+    if pgrep -x AeroSpace >/dev/null; then
+        run aerospace reload-config || warn "aerospace rejected the config"
+        printf '      reloaded aerospace config\n'
+    else
+        run open -a AeroSpace
+        printf '      started AeroSpace (grant Accessibility if prompted)\n'
+    fi
+else
+    warn "AeroSpace.app not installed, skipping"
+fi
+
 # sketchybar lives in an untrusted tap, so `brew services` refuses to touch it
 # until the tap is trusted. Trust it here too: --links skips the package phase
 # where it is normally done. Neither step is fatal -- a bar that needs a manual

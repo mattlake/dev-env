@@ -1,6 +1,28 @@
 # AeroSpace config
 # Primary modifier: alt (avoids clash with Ghostty cmd+1/2 tab switching)
 
+# Start automatically. Without this nothing launches AeroSpace at login, so the
+# whole setup -- tiling, and every workspace indicator in SketchyBar, which
+# reads its workspace list from the AeroSpace server -- silently does nothing.
+start-at-login = true
+
+# Tell SketchyBar which workspace was focused. SketchyBar subscribes to the
+# aerospace_workspace_change event but nothing was ever firing it, so the
+# indicators never updated.
+exec-on-workspace-change = [
+    '/bin/bash', '-c',
+    '$HOME/.config/sketchybar/plugins/aerospace_change.sh',
+]
+
+# Leave room for the SketchyBar bar, which is height 32 at y_offset 4, so it
+# occupies the top 36px. Without a top gap, tiled windows sit underneath it.
+gaps.outer.top    = 44
+gaps.outer.bottom = 8
+gaps.outer.left   = 8
+gaps.outer.right  = 8
+gaps.inner.horizontal = 8
+gaps.inner.vertical   = 8
+
 [mode.main.binding]
 # Focus
 alt-h = 'focus left'

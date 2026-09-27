@@ -1,27 +1,28 @@
 #!/bin/bash
+#
+# Renders one workspace indicator. $1 is the workspace this item represents.
+#
+# Runs once per space item on every workspace change, so avoid asking AeroSpace
+# who has focus when the event already told us: exec-on-workspace-change passes
+# FOCUSED_WORKSPACE through aerospace_change.sh. Fall back to querying for the
+# initial paint, where there is no event.
 
-# Get the workspace ID passed as argument
 WORKSPACE_ID=$1
 
-# Source colors
 source "$CONFIG_DIR/colors.sh"
 
-# Get the focused workspace
-FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
+FOCUSED="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused 2>/dev/null)}"
 
-# Check if this workspace is focused
-if [ "$WORKSPACE_ID" = "$FOCUSED_WORKSPACE" ]; then
-    # Active workspace - highlight with blue accent
-    sketchybar --set space.$WORKSPACE_ID \
+if [ "$WORKSPACE_ID" = "$FOCUSED" ]; then
+    sketchybar --set space."$WORKSPACE_ID" \
         background.drawing=on \
-        background.color=$ACCENT_COLOR \
-        label.color=$BASE \
-        icon.color=$BASE
+        background.color="$ACCENT_COLOR" \
+        label.color="$BASE" \
+        icon.color="$BASE"
 else
-    # Inactive workspace - subtle background
-    sketchybar --set space.$WORKSPACE_ID \
+    sketchybar --set space."$WORKSPACE_ID" \
         background.drawing=on \
-        background.color=$SURFACE0 \
-        label.color=$TEXT \
-        icon.color=$TEXT
+        background.color="$SURFACE0" \
+        label.color="$TEXT" \
+        icon.color="$TEXT"
 fi
