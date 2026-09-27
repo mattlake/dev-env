@@ -24,8 +24,9 @@ Every added line is judged against the ladder. Stop at the first rung that flags
 2. **Does the codebase already do it?** Reinvented helper, duplicated pattern. Flag with `delete:` and name the existing thing.
 3. **Does stdlib do it?** Flag with `stdlib:` and name the function.
 4. **Does the platform / framework do it natively?** Flag with `native:` and name the feature.
-5. **Is there a one-implementation abstraction?** Interface with one impl, factory for one product, config nobody sets, layer with one caller. Flag with `yagni:`.
-6. **Can it be shorter?** Same logic, fewer lines. Flag with `shrink:` and show the shorter form.
+5. **Is it a comment?** Every comment the diff adds is a finding. Names, test names and commit messages carry the intent instead. Flag with `delete:`.
+6. **Is there a one-implementation abstraction?** Interface with one impl, factory for one product, config nobody sets, layer with one caller. Flag with `yagni:`.
+7. **Can it be shorter?** Same logic, fewer lines. Flag with `shrink:` and show the shorter form.
 
 ## Format
 
@@ -33,7 +34,7 @@ Every added line is judged against the ladder. Stop at the first rung that flags
 
 Tags (same as ladder rungs):
 
-- `delete:` dead code, unused flexibility, speculative feature. Replacement: nothing.
+- `delete:` dead code, unused flexibility, speculative feature, added comment. Replacement: nothing, or a better name when the comment was explaining a bad one.
 - `stdlib:` hand-rolled thing the standard library ships. Name the function.
 - `native:` dependency or code doing what the platform already does. Name the feature.
 - `yagni:` abstraction with one implementation, config nobody sets, layer with one caller.
@@ -48,6 +49,8 @@ Tags (same as ladder rungs):
 `repo.py:L88: yagni: AbstractRepository with one implementation. Inline it until a second one exists.`
 
 `L52-71: delete: retry wrapper around an idempotent local call. Nothing replaces it.`
+
+`L17-19: delete: 3-line doc comment restating what `firstDifference` returns. Nothing, the name says it.`
 
 `L30-44: shrink: manual loop builds dict. dict(zip(keys, values)), 1 line.`
 
@@ -68,3 +71,5 @@ If nothing to cut: `lazy: lean already. Ship.` and stop.
 ## Boundaries
 
 Scope: over-engineering and complexity only. Correctness bugs, security holes, and performance are explicitly out of scope — route those to a normal review pass or the appropriate specialist skill. A single smoke test or `assert`-based self-check is the minimum, not bloat — never flag it for deletion. Does not apply fixes; only lists them.
+
+Before resting a finding on a claim about performance, allocation, or how a tool or library behaves, check it: run a benchmark, `-gcflags=-m`, a quick script, or read the source. If you can't check it, label the finding `(unverified)`. A reason that turns out false is worse than no reason.

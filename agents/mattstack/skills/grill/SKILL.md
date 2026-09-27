@@ -35,6 +35,10 @@ Keep numbering across the whole session, so Q4 is the fourth question asked. Eac
 
 Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, package versions, existing code), dispatch a sub-agent or run the lookup yourself; don't ask the user for anything you could find out. Don't block on it: a running exploration is an unsettled prerequisite, so only questions downstream of it wait; ask something else from the frontier in the meantime.
 
+Before building the frontier, look for decisions that are already made. Search earlier sessions for this project (`~/.claude/projects/<project>/*.jsonl`), task files, specs, notes and the code itself for the topic. Task files often lag behind decisions made in conversation. Record anything already settled as settled, with where you found it, and don't ask it again. If you disagree with a settled decision, say so once and let the user decide whether to reopen it.
+
+Never put an unchecked claim about a tool, library, or performance into a recommendation or a rationale. Measure it or read the source first. If that can't be done now, mark the claim `(unverified)` in the question and in the digest.
+
 The _decisions_ are the user's: put each to them and wait.
 
 ## Laziness pressure at plan time

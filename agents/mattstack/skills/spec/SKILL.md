@@ -19,7 +19,7 @@ If neither is obvious, ask which. Do not invent a decisions digest.
 
 ## Where the spec lives
 
-Write to `./specs/<slug>.md` in the current repo (create `specs/` if missing). Slug from the feature name — kebab-case, short. Print the path when done. If a spec at that path exists, ask before overwriting; offer to write `<slug>-v2.md` instead.
+Write to `~/.claude/specs/<repo>/<slug>.md`, where `<repo>` is the basename of `git rev-parse --show-toplevel` (create the directory if missing). Never write specs inside the repo. Slug from the feature name — kebab-case, short. Print the path when done. If a spec at that path exists, ask before overwriting; offer to write `<slug>-v2.md` instead.
 
 ## Spec shape
 
@@ -54,6 +54,8 @@ Each numbered. Each testable. Each one behaviour, not a bundle.
 - **One behaviour per numbered item.** No "and". No comma-separated lists of effects. `/mattstack:tdd-loop` splits on these — a fat behaviour becomes a fat slice.
 - **Ladder pressure.** Before writing each behaviour, ask: does this exist in the codebase already? Is it stdlib? Is it a native platform feature? If yes, the behaviour is "wire up X", not "build X".
 - **No implementation prose.** The spec says what, not how. Filenames, class names, and algorithms belong in the code, not here. Constraints are the exception (`must use existing AuthMiddleware`).
+- **Check decisions against code that exists.** If the feature is partly or fully implemented, read the code and check every decision and constraint against it. Where the digest and the code disagree, the spec describes the code only if the user has confirmed that; otherwise the mismatch goes under Open questions.
+- **No unchecked rationale.** A decision whose rationale rests on a claim about a tool, library, or performance carries `(unverified)` unless the claim was measured or read from source. Unverified rationales go under Open questions.
 - **Open questions block downstream skills.** If any remain, print a warning and tell the user to answer them or accept them explicitly as assumptions before running `/mattstack:tdd-loop`.
 
 ## Output
@@ -61,10 +63,10 @@ Each numbered. Each testable. Each one behaviour, not a bundle.
 After writing the file, print:
 
 ```
-Spec written: ./specs/<slug>.md
+Spec written: ~/.claude/specs/<repo>/<slug>.md
 Behaviours: <N>
 Open questions: <M>
-Next: /mattstack:tdd-loop ./specs/<slug>.md
+Next: /mattstack:tdd-loop ~/.claude/specs/<repo>/<slug>.md
 ```
 
 If M > 0, print the open questions inline and warn that tdd-loop should not run until they are resolved.

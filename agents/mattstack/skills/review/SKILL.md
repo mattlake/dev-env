@@ -11,7 +11,7 @@ Run the three specialist reviewers in parallel forks against the same diff, aggr
 ## Inputs
 
 1. **Diff range**: default `git diff <merge-base>...HEAD`. Accept user-supplied range or pasted diff. If not in a git repo, ask.
-2. **Spec path**: default `./specs/<slug>.md` if only one exists; else ask which. If no spec exists at all, skip `review-spec` and note the omission in the report.
+2. **Spec path**: default `~/.claude/specs/<repo>/<slug>.md`, where `<repo>` is the basename of `git rev-parse --show-toplevel`, if only one exists; else ask which. If no spec exists at all, skip `review-spec` and note the omission in the report.
 
 ## Fan-out
 

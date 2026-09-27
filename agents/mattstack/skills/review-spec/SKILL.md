@@ -10,7 +10,7 @@ Compare a diff to a spec doc. One question per finding: does the code deliver wh
 
 ## Inputs
 
-1. **Spec path**: `./specs/<slug>.md` (or supplied by the user or by `/mattstack:review`).
+1. **Spec path**: `~/.claude/specs/<repo>/<slug>.md` (or supplied by the user or by `/mattstack:review`).
 2. **Diff**: default is `git diff <merge-base>...HEAD`. If the user supplies a range, use it. If not in a git repo, ask.
 
 If the spec is missing, stop and tell the user.

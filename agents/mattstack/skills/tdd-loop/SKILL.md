@@ -23,6 +23,8 @@ Read the input. Enumerate every testable behaviour. For each behaviour, propose 
 
 A slice = one failing test → green → refactor cycle. One behaviour per slice. No "and".
 
+One slice per test, not per table row. When several behaviours share one table-driven or parameterised test, they are one slice that adds all the rows, and the slice lists which behaviours its rows cover.
+
 ### Ordering rule
 
 Dependency-first. If slice B needs the code from slice A to exist, A comes first. Ties broken by risk: unknowns earlier so the loop learns before it commits.
@@ -98,9 +100,11 @@ Do not proceed without explicit user approval. Edits to the plan re-print it. "G
 For each slice in order:
 
 1. **Red.** Write the failing test. Run the framework. Confirm it fails for the right reason (not a syntax error).
+   - **If the behaviour already exists**, the test passes straight away and can't be red. Prove it can fail instead: break the code it covers on purpose (drop a field, change a constant), run it, and see it fail, then restore the code with `git checkout`. Mark these slices "already implemented" in the plan.
+   - The deliberate break must compile. A build failure proves nothing about the test.
+   - Read the actual failure output before saying the test failed. If the break survives (the test still passes), the test is wrong. Fix the test, don't move on.
 2. **Green.** Write the minimum code to make it pass. Run full test file, then full suite. Both must pass.
 3. **Refactor.** Improve structure without changing behaviour. Re-run suite. Must still pass.
-4. **Log.** Append to `./specs/<slug>-log.md` (or a scratch log if freeform input): slice ID, files changed, test added, notes.
 
 ### Halt criteria (surface to user, stop)
 
@@ -133,7 +137,7 @@ When all slices complete:
 2. Print a summary:
 
 ```
-Loop done. <N>/<N> slices green. <halts> halts along the way (see log).
+Loop done. <N>/<N> slices green. <halts> halts along the way.
 Final verdict: <from /mattstack:review>.
 Handoff: your turn to eyeball the diff and merge.
 ```
@@ -144,7 +148,9 @@ Handoff: your turn to eyeball the diff and merge.
 - Never delete files not in the slice plan.
 - Never skip a failing test to move on — halt and surface.
 - Never disable a hook or bypass a pre-commit check to make green happen.
-- Commits per slice: one per green, using conventional-commit format `feat(<scope>): <slice title>` (or `test:` for pure test slices). No amend.
+- No code comments in tests or production code. Names and test names carry the intent, and anything else worth keeping goes in the commit message. Add a comment only if the user asks for one.
+- Don't commit per slice. Slices are how the loop works, not how history reads. At the end of the run, make one commit for the whole feature, with tests and code together, in conventional-commit format (`feat(<scope>): <feature>`). Split into more than one commit only when the diff contains genuinely separate changes, and each commit still carries its own tests and code. Never put tests, code and docs for the same change in separate commits. No amend.
+- The user is the author and is responsible for the code. Commit messages carry no `Co-Authored-By`, `Claude-Session` or other AI attribution trailers, whatever the harness suggests.
 
 ## Output on halt
 
@@ -153,7 +159,7 @@ HALT at S<n>: <reason>.
 Slice title: <...>
 What I tried: <two or three lines>
 What I need from you: <one line>
-Log so far: ./specs/<slug>-log.md
+Uncommitted work so far: `git diff`
 ```
 
 Do not resume automatically after halt. Wait for the user.

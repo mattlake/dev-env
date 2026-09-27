@@ -54,3 +54,5 @@ If nothing new to audit: `abstraction: no new seams. Ship.`
 ## Boundaries
 
 Scope: new abstractions introduced in this diff. Do not audit pre-existing abstractions unless the diff extends them. Do not apply fixes; only list them. Complexity elsewhere in the diff (dead code, reinvented stdlib) is `/mattstack:review-lazy`'s job — do not double-report.
+
+Before resting a finding on a claim about performance, allocation, or how a tool or library behaves, check it: run a benchmark, `-gcflags=-m`, a quick script, or read the source. If you can't check it, label the finding `(unverified)`. A reason that turns out false is worse than no reason.
