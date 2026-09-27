@@ -1,1 +1,2 @@
-config/nvim/lazy-lock.json
+# lazy-lock.json is intentionally tracked: it pins plugin commits so a rebuild
+# reproduces a known-good Neovim setup rather than pulling whatever is current.
