@@ -14,7 +14,7 @@ return {
 			settings = {
 				["csharp|background_analysis"] = {
 					-- Match the old AnalyzeOpenDocumentsOnly behaviour; full-solution
-					-- analysis is too heavy for the onecloud monorepo.
+					-- analysis is too heavy on a large solution.
 					dotnet_analyzer_diagnostics_scope = "openFiles",
 					dotnet_compiler_diagnostics_scope = "openFiles",
 				},

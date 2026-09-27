@@ -132,8 +132,6 @@ config.keys = {
     -- Copy mode with leader key (v ≈ vim visual mode)
     { key = "v",        mods = "LEADER",     action = act.ActivateCopyMode },
 
-    -- OneCloud: spawn api + web tabs
-
     -- Quick select mode (keyboard-driven text selection, great for URLs)
     { key = "Space",    mods = "LEADER",     action = act.QuickSelect },
 
