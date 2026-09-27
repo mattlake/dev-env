@@ -22,6 +22,9 @@ return {
 			typescript = { "prettierd" },
 			html = { "prettierd" },
 			cs = { lsp_format = "prefer" },
+			-- goimports organises/prunes imports (gopls will not on save);
+			-- gofumpt then applies its stricter superset of gofmt.
+			go = { "goimports", "gofumpt" },
 		},
 		default_format_opts = {
 			lsp_format = "fallback",

@@ -18,5 +18,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- WARN: This is not Goto Definition, this is Goto Declaration.
         --  For example, in C this would take you to the header.
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+        -- Server-side hint settings (see lsp/gopls.lua) only make the server
+        -- offer hints; they still have to be switched on per buffer.
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client and client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+            map("<leader>th", function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }), { bufnr = event.buf })
+            end, "[T]oggle inlay [H]ints")
+        end
     end,
 })
