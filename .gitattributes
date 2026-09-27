@@ -1,0 +1,16 @@
+# Normalise to LF in the repository. Without this, files committed from the
+# Windows machine land as CRLF and every cross-platform edit shows as a
+# whole-file rewrite in the diff.
+* text=auto eol=lf
+
+# Windows-native tooling that wants CRLF in the working tree.
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Never touched: treat as opaque.
+*.png binary
+*.jpg binary
+*.ico binary
+*.ttf binary
+*.otf binary
