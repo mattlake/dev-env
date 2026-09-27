@@ -111,6 +111,8 @@ let g:WhichKeyDesc_errors_prev = "<leader>ep Go to previous error in solution"
 "" Key mappings
 "" ========================================================
 
+inoremap jk <Esc>
+
 " Tab navigation
 nnoremap <A-n> :tabnext<CR>
 nnoremap <A-p> :tabprev<CR>
@@ -129,6 +131,9 @@ nnoremap ]] <Action>(MethodDown)
 vnoremap < <gv
 vnoremap > >gv
 
+" Execute macro saved in 'q' register
+nnoremap qj @q
+
 " Popup navigation
 inoremap <C-j> <Action>(PopupMenu-selectNext)
 inoremap <C-k> <Action>(PopupMenu-selectPrev)
@@ -145,6 +150,7 @@ map <leader>j <Plug>(easymotion-s)
 
 " Open NERDTree (use q to exit)
 map - :NERDTreeToggle<CR>
+map <leader>t <Action>(ActivateUnitTestsToolWindow)
 
 " Folding
 map <leader>zc :action CollapseAllRegions<CR>
@@ -169,7 +175,7 @@ map <leader>as <action>(SearchEverywhere)
 map <leader>ff <action>(GotoFile)
 map <leader>fa <action>(SearchEverywhere)
 map <leader>fr <action>(RecentFiles)
-map <leader>fg <action>(FindInPath)
+map <leader>fc <action>(FindInPath)
 map <leader><leader> <Action>(RecentFiles)
 map <leader>fl <action>(RecentLocations)
 map <leader>fs <action>(NewScratchFile)
