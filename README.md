@@ -64,6 +64,7 @@ The Mac setup mirrors the Windows one:
 | GlazeWM | AeroSpace |
 | Zebar | SketchyBar |
 | Flow Launcher | Raycast |
+| GlazeWM's focus border | JankyBorders (`borders`) |
 
 Raycast keeps its settings in its own cloud sync rather than in dotfiles, so it
 cannot be fully captured here. Sign in to restore extensions and hotkeys.
@@ -75,9 +76,10 @@ cannot be fully captured here. Sign in to restore extensions and hotkeys.
   winget or scoop manifest to match `macos/Brewfile`.
 - `install/windows.ps1` has never been executed. It was written on the Mac,
   where there is no PowerShell to even parse it.
-- `borders` (JankyBorders) is installed and in the Brewfile but nothing
-  launches it and it has no config. It draws a highlight around the focused
-  window, which is what GlazeWM gives you on Windows and AeroSpace does not.
+- Whether the borders overlay is actually drawn cannot be checked from a
+  script: `screencapture` does not capture that window layer, so even a pure
+  red 8pt border yields zero matching pixels in a screenshot. The config is
+  proven to load; how it looks is a matter for your eyes.
 - `start-at-login = true` is set but unverified: AeroSpace registers itself
   through SMAppService rather than a launchd plist, so confirming it needs a
   reboot.

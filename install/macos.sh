@@ -105,6 +105,7 @@ link shared/jetbrains/.ideavimrc      "$HOME/.ideavimrc"
 info "Symlinks: macOS"
 link macos/aerospace/aerospace.toml   "$HOME/.config/aerospace/aerospace.toml"
 link macos/sketchybar                 "$HOME/.config/sketchybar"
+link macos/borders                    "$HOME/.config/borders"
 
 info "Services"
 # AeroSpace has start-at-login in its config, but that only takes effect once
@@ -138,6 +139,24 @@ if command -v sketchybar >/dev/null; then
     fi
 else
     warn "sketchybar not on PATH, skipping restart"
+fi
+
+# borders draws the focus highlight AeroSpace does not. Its formula ships a
+# launchd service, so let brew own restart-on-crash and start-at-login rather
+# than launching it from aerospace's after-startup-command.
+if command -v borders >/dev/null; then
+    if $DRY_RUN; then
+        printf '      would run: brew services restart borders\n'
+    elif brew services restart felixkratz/formulae/borders >/dev/null 2>&1; then
+        printf '      restarted borders\n'
+    else
+        warn "could not restart borders via brew services; starting directly"
+        pkill -x borders 2>/dev/null || true
+        ("$HOME/.config/borders/bordersrc" >/dev/null 2>&1 &) \
+            || warn "borders did not start, run it manually"
+    fi
+else
+    warn "borders not on PATH, skipping"
 fi
 
 cat <<'EOF'

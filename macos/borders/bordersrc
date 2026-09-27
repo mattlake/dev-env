@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# JankyBorders: draws a highlight around the focused window.
+#
+# AeroSpace deliberately draws no focus indicator of its own, so without this
+# there is nothing to show which tile has focus -- the thing GlazeWM gives you
+# for free on Windows.
+#
+# Read automatically when `borders` is run with no arguments, which is what the
+# brew service does. Re-running `borders` with arguments updates a live
+# instance rather than starting a second one.
+
+# Catppuccin Mocha, matching macos/sketchybar/colors.sh. active_color is the
+# same blue as the focused workspace indicator in the bar, so focus reads the
+# same in both places.
+options=(
+    style=round
+    width=4.0
+    hidpi=on
+    active_color=0xff89b4fa    # BLUE      -- same as sketchybar ACCENT_COLOR
+    inactive_color=0xff313244  # SURFACE0  -- same as an idle workspace pill
+)
+
+# The brew service runs the formula's own binary, but a bare `borders` from a
+# shell needs resolving: Homebrew's prefix differs between Intel (/usr/local)
+# and Apple Silicon (/opt/homebrew).
+BORDERS="$(command -v borders \
+    || { [ -x /opt/homebrew/bin/borders ] && echo /opt/homebrew/bin/borders; } \
+    || { [ -x /usr/local/bin/borders ] && echo /usr/local/bin/borders; })"
+
+[ -x "$BORDERS" ] || exit 0
+
+exec "$BORDERS" "${options[@]}"
