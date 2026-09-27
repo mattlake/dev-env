@@ -1,0 +1,52 @@
+mattstack
+Copyright (c) 2026 Matt
+
+This product includes software adapted from third-party projects, all under
+the MIT License. Full license texts follow at the bottom of this file.
+
+===============================================================================
+skills/grill/
+-------------------------------------------------------------------------------
+Adapted from mattpocock/skills — specifically the "grilling" skill.
+Source: https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling
+Copyright (c) 2026 Matt Pocock
+
+===============================================================================
+skills/review-lazy/
+-------------------------------------------------------------------------------
+Adapted from DietrichGebert/ponytail — specifically the "ponytail-review" and
+"ponytail" persona skills.
+Source: https://github.com/DietrichGebert/ponytail
+Copyright (c) 2026 DietrichGebert
+
+===============================================================================
+Authoring discipline
+-------------------------------------------------------------------------------
+The skill-authoring approach used to build mattstack draws on patterns from
+obra/superpowers "writing-skills". No content from that project is bundled or
+redistributed here; the credit is for methodology only.
+Source: https://github.com/obra/superpowers
+Copyright (c) 2025 Jesse Vincent
+
+
+===============================================================================
+MIT License (applies to all three attributed works above)
+===============================================================================
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
