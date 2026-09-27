@@ -53,7 +53,12 @@ vim.opt.autoindent = true
 
 vim.opt.mouse = "a"
 
-vim.lsp.enable("omnisharp")
+-- WARN-level logging let omnisharp grow lsp.log to 1.9GB; a ballooning log at
+-- ERROR level is a real symptom worth investigating, not noise.
+vim.lsp.log.set_level(vim.log.levels.ERROR)
+
+-- C# is handled by roslyn.nvim (lua/plugins/roslyn.lua), which manages its own
+-- server lifecycle and solution targeting.
 vim.lsp.enable("vtsls")
 -- angularls requires @angular/language-service in the project's node_modules.
 -- If not in package.json, from the Angular project root run:

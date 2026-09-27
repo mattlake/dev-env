@@ -26,7 +26,11 @@ return {
 		default_format_opts = {
 			lsp_format = "fallback",
 		},
-		format_on_save = { timeout_ms = 500 },
+		format_on_save = function(bufnr)
+			-- Roslyn LSP formatting can exceed 500ms while a solution is still warming up.
+			local timeout = vim.bo[bufnr].filetype == "cs" and 2000 or 500
+			return { timeout_ms = timeout }
+		end,
 		formatters = {
 			shfmt = {
 				append_args = { "-i", "2" },
