@@ -1,6 +1,6 @@
 ---
 name: grill
-description: Socratic interview that surfaces every open decision behind a plan, feature, or design. Numbered questions with recommended answers, one round at a time, until the design tree is fully explored. Ends with a structured decisions digest ready for `/mattstack:spec` to consume. Use when the user says "grill me", "stress-test this plan", "grill this idea", "pre-mortem", "what am I missing", or before starting any non-trivial build.
+description: Socratic interview that surfaces every open decision behind a plan, feature, or design. One numbered question at a time with a recommended answer, until the design tree is fully explored. Ends with a structured decisions digest ready for `/mattstack:spec` to consume. Use when the user says "grill me", "stress-test this plan", "grill this idea", "pre-mortem", "what am I missing", or before starting any non-trivial build.
 license: MIT
 ---
 
@@ -15,27 +15,25 @@ See NOTICE at repo root.
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
+The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Work out the whole frontier, but ask **one question per message**. Pick the most foundational one first, the one whose answer is most likely to reshape or remove others. Number it, give your recommended answer, then stop and wait.
 
-## Round format
+Ask in plain text in your reply. Do not use the built-in question picker (`AskUserQuestion` or similar). The user answers in their own words, and may push back, ask a follow-up, or change the question.
+
+## Question format
 
 ```
-Q1 - <question title>: <question body, might be multiple paragraphs, including multiple choices>
+Q<n> - <question title>
 
-Recommend: <your recommended answer>
-
----
-
-Q2 - <question title>: <question body>
+<question body, might be multiple paragraphs, including multiple choices>
 
 Recommend: <your recommended answer>
 ```
 
-Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another still open in this round belongs to a _later_ round, not this one.
+Keep numbering across the whole session, so Q4 is the fourth question asked. Each answer reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them, and may make queued questions moot. Recompute the frontier after every answer before choosing the next question. Drop any question an answer has made moot, and say so in one line.
 
 ## Fact-finding vs decisions
 
-Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, package versions, existing code), dispatch a sub-agent or run the lookup yourself; don't ask the user for anything you could find out. Don't block on it: a running exploration is an unsettled prerequisite, so only questions downstream of it wait; ask the rest of the frontier now.
+Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, package versions, existing code), dispatch a sub-agent or run the lookup yourself; don't ask the user for anything you could find out. Don't block on it: a running exploration is an unsettled prerequisite, so only questions downstream of it wait; ask something else from the frontier in the meantime.
 
 The _decisions_ are the user's: put each to them and wait.
 
@@ -78,4 +76,4 @@ Rationale: <...>
 - <anything explicitly ruled out during the session>
 ```
 
-Every decision from every round belongs in the digest, in the order they settled. If a decision was answered "defer" or "not yet", record it — future spec revisions may return to it.
+Every decision from every question belongs in the digest, in the order they settled. If a decision was answered "defer" or "not yet", record it — future spec revisions may return to it.
