@@ -17,13 +17,16 @@ zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 
 # --- PATH ---
-# /etc/paths.d/go (root-owned) puts the stale /usr/local/go install on PATH.
-# Homebrew's go at /usr/local/bin currently wins by ordering only, so drop the
-# stale entry to stop a brew unlink silently downgrading the toolchain.
-path=(${path:#/usr/local/go/bin})
-
 # `go install` targets $GOPATH/bin (dlv, goimports, gofumpt, air, mockgen)
 export PATH="$HOME/.local/bin:$HOME/scripts:$HOME/go/bin:$PATH"
+
+if [[ "$OSTYPE" == darwin* ]]; then
+    # macOS only: /etc/paths.d/go (root-owned) puts the stale /usr/local/go
+    # install on PATH. Homebrew's go at /usr/local/bin currently wins by
+    # ordering alone, so drop the stale entry to stop a brew unlink silently
+    # downgrading the toolchain.
+    path=(${path:#/usr/local/go/bin})
+fi
 
 # --- Environment ---
 export EDITOR=nvim
@@ -46,8 +49,10 @@ setopt nocaseglob
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # --- fzf ---
-source /usr/share/doc/fzf/examples/key-bindings.zsh 2>/dev/null
-source /usr/share/doc/fzf/examples/completion.zsh 2>/dev/null
+# `fzf --zsh` emits both key-bindings and completion, and resolves wherever fzf
+# is installed. The old /usr/share/doc/fzf/examples paths were Debian-only and
+# silently no-op'd on macOS.
+command -v fzf >/dev/null && source <(fzf --zsh)
 
 # --- zoxide ---
 eval "$(zoxide init zsh)"
