@@ -1,2 +1,7 @@
 # lazy-lock.json is intentionally tracked: it pins plugin commits so a rebuild
 # reproduces a known-good Neovim setup rather than pulling whatever is current.
+
+# Machine-local overrides: never shared, never tracked. The .example files
+# document the contract; the real ones live in $HOME.
+*.local.lua
+.zshrc.local

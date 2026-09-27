@@ -61,39 +61,6 @@ config.switch_to_last_active_tab_when_closing_tab = true
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
 -- ============================================================================
--- ONECLOUD: spawn api + web tabs (replaces the old tmux oc-run)
--- ============================================================================
-local function spawn_oc_tab(mux_window, title, cwd, command)
-    local tab = mux_window:spawn_tab({
-        args = {
-            "wsl", "-d", "Ubuntu-24.04", "--cd", cwd, "--",
-            "zsh", "-ic", command .. "; exec zsh -i",
-        },
-    })
-    tab:set_title(title)
-    return tab
-end
-
-wezterm.on("oc-run", function(window, pane)
-    local mux_window = window:mux_window()
-    local api_tab = spawn_oc_tab(
-        mux_window,
-        "api",
-        "/home/matt/code/onecloud",
-        "oc-up"
-            .. " && dotnet restore cmsp-api/src/CMSP.Web.Host/CMSP.Web.Host.csproj"
-            .. " && dotnet run --project cmsp-api/src/CMSP.Web.Host/CMSP.Web.Host.csproj"
-    )
-    spawn_oc_tab(
-        mux_window,
-        "web",
-        "/home/matt/code/onecloud/cmsp-web-app",
-        "npm start"
-    )
-    api_tab:activate()
-end)
-
--- ============================================================================
 -- KEYBINDINGS
 -- ============================================================================
 config.keys = {
@@ -166,7 +133,6 @@ config.keys = {
     { key = "v",        mods = "LEADER",     action = act.ActivateCopyMode },
 
     -- OneCloud: spawn api + web tabs
-    { key = "o",        mods = "LEADER",     action = act.EmitEvent("oc-run") },
 
     -- Quick select mode (keyboard-driven text selection, great for URLs)
     { key = "Space",    mods = "LEADER",     action = act.QuickSelect },
@@ -336,6 +302,39 @@ wezterm.on("update-status", function(window, pane)
     }))
     window:set_right_status("")
 end)
+
+-- ============================================================================
+-- LOCAL OVERRIDES
+-- ============================================================================
+-- Machine-specific setup -- project launchers, work paths, per-host tweaks --
+-- belongs outside version control. Drop a ~/.wezterm.local.lua that returns
+-- nothing and mutates what it is handed:
+--
+--   return function(config, wezterm, act)
+--     wezterm.on("my-event", function(window, pane) ... end)
+--     table.insert(config.keys, { key = "o", mods = "LEADER",
+--                                 action = act.EmitEvent("my-event") })
+--   end
+--
+-- Absent file is not an error; this config is expected to work without one.
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+if home then
+    local local_path = home .. "/.wezterm.local.lua"
+    local chunk, load_err = loadfile(local_path)
+    if chunk then
+        local ok, result = pcall(chunk)
+        if ok and type(result) == "function" then
+            local applied, apply_err = pcall(result, config, wezterm, act)
+            if not applied then
+                wezterm.log_error("wezterm.local.lua raised: " .. tostring(apply_err))
+            end
+        elseif not ok then
+            wezterm.log_error("wezterm.local.lua raised: " .. tostring(result))
+        end
+    elseif load_err and not load_err:match("No such file") then
+        wezterm.log_error("wezterm.local.lua is unreadable: " .. tostring(load_err))
+    end
+end
 
 -- ============================================================================
 -- RETURN CONFIG

@@ -1,0 +1,34 @@
+-- Example ~/.wezterm.local.lua
+--
+-- Copy to ~/.wezterm.local.lua for machine-specific WezTerm setup that should
+-- not be shared: project launchers, work directories, per-host font sizes.
+-- ~/.wezterm.lua loads it if present and ignores its absence.
+--
+-- Return a function. It receives the config table plus the wezterm and act
+-- modules, so it can register events, add keys, or override any setting.
+
+return function(config, wezterm, act)
+    -- Per-machine appearance tweak
+    -- config.font_size = 15.0
+
+    -- A project launcher bound to LEADER-o
+    -- local function spawn_project_tab(mux_window, title, cwd, command)
+    --     local tab = mux_window:spawn_tab({
+    --         args = { "zsh", "-ic", command .. "; exec zsh -i" },
+    --         cwd = cwd,
+    --     })
+    --     tab:set_title(title)
+    --     return tab
+    -- end
+    --
+    -- wezterm.on("project-run", function(window, pane)
+    --     local mux_window = window:mux_window()
+    --     spawn_project_tab(mux_window, "api", "/path/to/project", "make run")
+    -- end)
+    --
+    -- table.insert(config.keys, {
+    --     key = "o",
+    --     mods = "LEADER",
+    --     action = act.EmitEvent("project-run"),
+    -- })
+end
