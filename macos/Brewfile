@@ -1,0 +1,124 @@
+# macOS package manifest. Rebuild with:
+#
+#   brew tap felixkratz/formulae && brew trust felixkratz/formulae
+#   brew bundle install --file=macos/Brewfile
+#
+# The trust step is required first: `brew bundle dump` silently omits formulae
+# from untrusted taps, which is how sketchybar and borders went missing from an
+# earlier version of this file.
+#
+# Not covered here, see install/macos.sh:
+#   starship  -- installed out-of-band to /usr/local/bin, not a brew formula
+#   zinit     -- git clone into ~/.local/share/zinit/zinit.git
+
+tap "codecrafters-io/tap"
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
+tap "jesseduffield/lazydocker"
+tap "jesseduffield/lazygit"
+tap "nikitabobko/tap"
+# Cross-platform make
+brew "cmake"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Debugger for the Go programming language
+brew "delve"
+# .NET Core
+brew "dotnet", link: false
+# .NET Core
+brew "dotnet@8"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line tools for fly.io services
+brew "flyctl"
+# GNU internationalization (i18n) and localization (l10n) library
+brew "gettext"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Audit git repos for secrets
+brew "gitleaks"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Configurable static site generator
+brew "hugo"
+# Environment diagnostics for Kotlin Multiplatform Mobile app development
+brew "kdoctor"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Parsing Expression Grammars For Lua
+brew "lpeg"
+# Clone of ls with colorful output, file type icons, and more
+brew "lsd"
+# Incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Small build system for use with gyp or CMake
+brew "ninja"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
+# General-purpose scripting language
+brew "php"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Internet file retriever
+brew "wget"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Status bar -- the zebar equivalent. From felixkratz/formulae, which must be
+# trusted before `brew bundle` will touch it.
+brew "felixkratz/formulae/sketchybar"
+# Active-window border, since AeroSpace draws none of its own.
+brew "felixkratz/formulae/borders"
+cask "aerospace"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code"
+# Developer platform
+cask "dotnet-sdk"
+# UI toolkit for building applications for mobile, web and desktop
+cask "flutter"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Open Source Multimedia Framework
+cask "gstreamer-runtime"
+# GPU-based terminal emulator
+cask "kitty"
+# Replacement for Docker Desktop
+cask "orbstack"
+# Control your tools with a few keystrokes
+cask "raycast"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm"
+# Compatibility layer to run Windows applications
+cask "wine-stable"
+go "github.com/air-verse/air"
+go "mvdan.cc/gofumpt"
+go "golang.org/x/tools/cmd/goimports"
+go "github.com/golang/mock/mockgen"
+npm "@angular/cli"
+npm "@google/gemini-cli"
+npm "@vue/cli"
+npm "n"
+npm "tailwindcss"
+npm "typescript"
