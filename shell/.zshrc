@@ -1,6 +1,16 @@
 # --- zinit ---
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 
+# Annexes must load before plugins
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+# compinit must run before fzf-tab
+autoload -Uz compinit && compinit
+
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light Aloxaf/fzf-tab
@@ -50,3 +60,4 @@ alias pwgen='pwgen -s 32 1'
 eval "$(starship init zsh)"
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
