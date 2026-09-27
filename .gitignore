@@ -5,3 +5,7 @@
 # document the contract; the real ones live in $HOME.
 *.local.lua
 .zshrc.local
+
+# herdr writes its logs beside its config, so they would otherwise be tracked
+# once shared/herdr/ exists.
+herdr*.log
