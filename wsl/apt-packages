@@ -1,0 +1,48 @@
+# WSL (Ubuntu 24.04) package manifest, the analogue of macos/Brewfile.
+# install/wsl.sh adds the third-party repos first, then installs this list in
+# one apt-get call.
+#
+# Not covered here, see install/wsl.sh:
+#   zinit, starship, herdr, claude, zoxide, lazygit, lazydocker, presenterm,
+#   tree-sitter CLI, fnm + node, .NET SDKs + global tools, go install tools
+#   fzf           -- noble's 0.44 predates `fzf --zsh`, so from GitHub instead
+
+build-essential
+curl
+wget
+git
+unzip
+zsh
+ripgrep
+pwgen
+jq
+btop
+# GitLab CLI
+glab
+# clipboard for tools that do not know about win32yank
+xclip
+rsync
+eza
+# Ubuntu names the binary fdfind; wsl.sh links it to ~/.local/bin/fd
+fd-find
+
+# Runtime libs for headless Chromium, which `ng test` launches
+libnss3
+libnspr4
+libasound2t64
+
+# dotnet-install.sh does not bundle ICU and the SDK aborts without it
+libicu74
+
+# From ppa:neovim-ppa/unstable: shared/nvim needs 0.12, noble ships 0.9
+neovim
+
+# From ppa:longsleep/golang-backports: noble's 1.22 is too old for the tools
+golang-go
+
+# From Docker's own apt repo
+docker-ce
+docker-ce-cli
+containerd.io
+docker-buildx-plugin
+docker-compose-plugin
