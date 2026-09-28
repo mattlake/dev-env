@@ -16,10 +16,15 @@ macos/      Mac only
   aerospace/  tiling window manager
   sketchybar/ status bar
   Brewfile    package manifest
+wsl/        WSL (Ubuntu 24.04) only
+  apt-packages  package manifest
+  wsl.conf      installed to /etc/wsl.conf
 windows/    Windows only
   windows-terminal/
 install/
+  lib.sh      helpers sourced by macos.sh and wsl.sh
   macos.sh    rebuild a Mac
+  wsl.sh      rebuild the WSL Ubuntu box
   windows.ps1 rebuild a Windows machine
 ```
 
@@ -41,7 +46,22 @@ git clone git@github.com:mattlake/dev-env.git $HOME\dev-env
 .\dev-env\install\windows.ps1
 ```
 
-Both installers are idempotent. Anything already at a target path is moved to
+WSL, as your normal user (the script uses sudo itself and refuses to run as
+root):
+
+```sh
+git clone https://github.com/mattlake/dev-env.git ~/dev-env
+~/dev-env/install/wsl.sh --dry-run
+~/dev-env/install/wsl.sh
+```
+
+It installs `wsl/apt-packages` plus the tools apt does not carry, adds you to
+the `docker` group, switches your login shell to zsh and writes
+`/etc/wsl.conf` so Docker starts on boot. Run `wsl --shutdown` from Windows
+afterwards for the group and `wsl.conf` to take effect. WezTerm runs on the
+Windows side, so its config comes from `install/windows.ps1`, not here.
+
+All installers are idempotent. Anything already at a target path is moved to
 `~/.dev-env-backup/<timestamp>/` before a symlink replaces it, so nothing is
 overwritten in place. `--links` / `-LinksOnly` skips package installation.
 

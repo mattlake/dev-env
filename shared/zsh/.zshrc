@@ -20,6 +20,16 @@ zinit light jeffreytse/zsh-vi-mode
 # `go install` targets $GOPATH/bin (dlv, goimports, gofumpt, air, mockgen)
 export PATH="$HOME/.local/bin:$HOME/scripts:$HOME/go/bin:$PATH"
 
+# dotnet-install.sh and fnm (the WSL installs) live outside any system PATH.
+# Checking for the dotnet binary, not the dir, because global tools create
+# ~/.dotnet/tools on the Mac too.
+if [[ -x $HOME/.dotnet/dotnet ]]; then
+    export DOTNET_ROOT="$HOME/.dotnet"
+    export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
+fi
+[[ -d $HOME/.local/share/fnm ]] && export PATH="$HOME/.local/share/fnm:$PATH"
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
+
 if [[ "$OSTYPE" == darwin* ]]; then
     # macOS only: /etc/paths.d/go (root-owned) puts the stale /usr/local/go
     # install on PATH. Homebrew's go at /usr/local/bin currently wins by

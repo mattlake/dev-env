@@ -96,6 +96,5 @@ Done, as far as this script goes. Still to capture from this machine:
   * flow launcher %APPDATA%\FlowLauncher\  -> windows/flow-launcher/
   * a winget or scoop manifest to match macos/Brewfile
 
-WSL shares the shared/ tree: run install/macos.sh --links from inside WSL,
-or symlink shared/zsh/.zshrc to ~/.zshrc there by hand.
+WSL has its own installer: run install/wsl.sh from a clone inside WSL.
 '@
