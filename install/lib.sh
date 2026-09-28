@@ -64,4 +64,5 @@ link_shared() {
     link shared/herdr/config.toml         "$HOME/.config/herdr/config.toml"
     link shared/git/.gitconfig            "$HOME/.gitconfig"
     link shared/git/ignore                "$HOME/.config/git/ignore"
+    link agents/mattstack                 "$HOME/.claude/skills/mattstack"
 }

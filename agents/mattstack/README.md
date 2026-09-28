@@ -9,7 +9,7 @@ Self-contained — no other plugins required.
 ## Install
 
 ```sh
-ln -s ~/dev-env/agents/mattstack ~/.claude/skills/mattstack
+ln -s ~/dev-env/agents/mattstack ~/.claude/skills/mattstack   # or run install/wsl.sh / install/macos.sh
 ```
 
 **Restart Claude Code.** `/reload-plugins` alone will not pick up a newly added plugin directory — it only reloads plugins already known to the session. Once loaded, subsequent edits to any `SKILL.md` are picked up by `/reload-plugins`.
