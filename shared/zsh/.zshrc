@@ -62,7 +62,17 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # `fzf --zsh` emits both key-bindings and completion, and resolves wherever fzf
 # is installed. The old /usr/share/doc/fzf/examples paths were Debian-only and
 # silently no-op'd on macOS.
-command -v fzf >/dev/null && source <(fzf --zsh)
+if command -v fzf >/dev/null; then
+  if fzf --zsh >/dev/null 2>&1; then
+    source <(fzf --zsh)
+  else
+    # fzf < 0.48 (Ubuntu apt ships 0.44) has no --zsh flag.
+    for fzf_script in /usr/share/doc/fzf/examples/{key-bindings,completion}.zsh; do
+      [ -f "$fzf_script" ] && source "$fzf_script"
+    done
+    unset fzf_script
+  fi
+fi
 
 # --- zoxide ---
 eval "$(zoxide init zsh)"
