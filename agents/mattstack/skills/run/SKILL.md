@@ -1,6 +1,6 @@
 ---
 name: run
-description: Drive one item through the whole mattstack pipeline — grill, spec, tdd-loop, review — advancing on its own and stopping only where a stage halts. State lives in `~/.claude/specs/<repo>/`, never in the repo, so a run can be resumed in any later session. With no argument, lists items in flight for this repo. Use when the user says "run this", "start a run", "factory this", "what's in flight", "resume", or "carry on with <slug>".
+description: Drive one item through the whole mattstack pipeline — grill, spec, tdd-loop, verify, review — advancing on its own and stopping only where a stage halts. State lives in `~/.claude/specs/<repo>/`, never in the repo, so a run can be resumed in any later session. With no argument, lists items in flight for this repo. Use when the user says "run this", "start a run", "factory this", "what's in flight", "resume", or "carry on with <slug>".
 license: MIT
 ---
 
@@ -17,6 +17,7 @@ Per item `<slug>`:
 - `<slug>.state.md` — stage and status (shape below).
 - `<slug>.digest.md` — the decisions digest from grill.
 - `<slug>.md` — the spec.
+- `<slug>.verify.md` — the latest verify report.
 
 Never write state, notes or logs inside the repo. Never touch the repo's `.gitignore`.
 
@@ -27,7 +28,7 @@ Never write state, notes or logs inside the repo. Never touch the repo's `.gitig
 slug: <slug>
 branch: <branch>
 base: <branch the run started from>
-stage: grill | spec | tdd-loop | review | done
+stage: grill | spec | tdd-loop | verify | review | done
 status: running | halted | done
 halt: <one-line reason, empty unless halted>
 updated: <YYYY-MM-DD>
@@ -84,13 +85,20 @@ Invoke `/mattstack:spec` with `<slug>.digest.md` and the slug. The spec must lan
 Invoke `/mattstack:tdd-loop` with `<slug>.md`. Its approval gate stays: the user still replies "go" to the slice plan.
 
 - `HALT at S<n>` → halt with tdd-loop's reason line.
-- Loop done → record the final verdict from its closing review, then treat it as the `review` stage's result (below) without re-running review.
+- Loop done → log the verdict from its closing review and the HEAD commit, then advance to `verify`.
 
 On resume, run tdd-loop again from the split. Slices already implemented are proved and marked by tdd-loop's own red-step rule.
 
+### verify
+
+Invoke `/mattstack:verify` with `<slug>.md`.
+
+- `verify: pass.` → advance to `review`.
+- `verify: halt.` → halt with the summary line. The fix is the user's, by hand or with `/mattstack:tdd-loop` on the failing behaviour. On resume, run verify again.
+
 ### review
 
-Invoke `/mattstack:review` with the diff `<base>...HEAD` and spec `<slug>.md`.
+If the log holds tdd-loop's closing verdict and HEAD has not moved since, use that verdict. Otherwise invoke `/mattstack:review` with the diff `<base>...HEAD` and spec `<slug>.md`.
 
 - `verdict: ship` → `stage: done`, `status: done`.
 - `verdict: revise` or `verdict: block` → halt with the verdict line. On resume, run review again.
@@ -104,6 +112,7 @@ Run done: <slug>
 Branch: <branch> (local, not pushed)
 Spec: ~/.claude/specs/<repo>/<slug>.md
 Verdict: ship.
+Unverifiable: <behaviours verify could not check, or "none">
 Next: eyeball the diff, then merge or push yourself.
 ```
 

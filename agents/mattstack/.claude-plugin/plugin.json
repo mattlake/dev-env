@@ -1,7 +1,7 @@
 {
   "name": "mattstack",
-  "description": "Opinionated dev workflow: grill a plan, cut a spec, drive TDD AFK, review against spec + laziness + abstraction cost. run drives the whole chain with resumable state.",
-  "version": "0.2.0",
+  "description": "Opinionated dev workflow: grill a plan, cut a spec, drive TDD AFK, verify it runs, review against spec + laziness + abstraction cost. run drives the whole chain with resumable state.",
+  "version": "0.3.0",
   "author": {
     "name": "Matt"
   }

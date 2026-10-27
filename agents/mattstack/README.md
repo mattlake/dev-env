@@ -2,7 +2,7 @@
 
 Opinionated dev workflow for Claude Code, shipped as a plugin.
 
-Flow: **grill** a plan → cut a **spec** → drive **TDD** AFK → **review** the diff against spec, laziness, and abstraction cost. `/mattstack:run` drives the whole chain and keeps resumable state.
+Flow: **grill** a plan → cut a **spec** → drive **TDD** AFK → **verify** it runs → **review** the diff against spec, laziness, and abstraction cost. `/mattstack:run` drives the whole chain and keeps resumable state.
 
 Self-contained — no other plugins required.
 
@@ -20,10 +20,11 @@ Skills appear under `/mattstack:*`.
 
 | Skill | Purpose |
 |---|---|
-| `/mattstack:run` | Drives one item through grill → spec → tdd-loop → review; state in `~/.claude/specs/<repo>/`, resumable. |
+| `/mattstack:run` | Drives one item through grill → spec → tdd-loop → verify → review; state in `~/.claude/specs/<repo>/`, resumable. |
 | `/mattstack:grill` | Socratic interview that surfaces every open decision behind a plan. |
 | `/mattstack:spec` | Turns a grill session (or freeform notes) into a spec doc. |
 | `/mattstack:tdd-loop` | Splits a spec into ordered slices and drives red-green-refactor AFK. |
+| `/mattstack:verify` | Runs build/typecheck/lint, then exercises each spec behaviour in the running app. Halts on any failure. |
 | `/mattstack:review` | Fans out to the three specialist reviewers in parallel and aggregates. |
 | `/mattstack:review-spec` | Diff vs spec doc — does the code deliver what was specified? |
 | `/mattstack:review-lazy` | YAGNI / delete-first review, one line per finding. |
