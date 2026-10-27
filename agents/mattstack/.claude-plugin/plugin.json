@@ -1,7 +1,7 @@
 {
   "name": "mattstack",
   "description": "Opinionated dev workflow: grill a plan, cut a spec, drive TDD AFK, review against spec + laziness + abstraction cost.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Matt"
   }

@@ -46,7 +46,7 @@ Print in this order:
 
 ## Verdict rule
 
-- Any `critical` from `review-spec` OR any `violates` from any specialist → `verdict: block. Fix critical findings before merge.`
+- Any `critical` or `violates` finding from `review-spec` → `verdict: block. Fix critical findings before merge.`
 - Any `major` from `review-spec` OR a `net -N` from `review-lazy` where N is more than 20% of added lines → `verdict: revise. <one-line summary of the top pressure>.`
 - Otherwise → `verdict: ship.`
 

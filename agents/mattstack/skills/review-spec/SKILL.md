@@ -59,4 +59,4 @@ If zero findings at any severity: `spec: matches. <N>/<N> behaviours covered. Sh
 
 ## Boundaries
 
-Scope: spec conformance only. Bugs unrelated to the spec, security holes, and performance are out of scope — that is what `/mattstack:review-lazy` and a normal review pass are for. Do not apply fixes; only list them.
+Scope: spec conformance only. Bugs unrelated to the spec, security holes, and performance are out of scope — route those to a correctness or security review pass. `/mattstack:review-lazy` does not cover them either. Do not apply fixes; only list them.

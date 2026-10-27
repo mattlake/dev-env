@@ -1,6 +1,6 @@
 ---
 name: tdd-loop
-description: Split a spec (or freeform notes) into ordered slices, get approval, then drive red-green-refactor AFK — one behaviour per slice, dependency ordered, shared-state changes batched to avoid version-bump churn. Halts only on real blockers (test won't go green, critical review finding, build fails, spec gap). Autodetects test framework. Use when the user says "tdd this", "drive this spec", "afk loop", or after `/mattstack:spec` produces a spec.
+description: Split a spec (or freeform notes) into ordered slices, get approval, then drive red-green-refactor AFK — one behaviour per slice, dependency ordered, shared-state changes batched to avoid version-bump churn. Halts only on real blockers (test won't go green, halting review finding, build fails, spec gap). Autodetects test framework. Use when the user says "tdd this", "drive this spec", "afk loop", or after `/mattstack:spec` produces a spec.
 license: MIT
 ---
 
@@ -111,7 +111,7 @@ For each slice in order:
 Halt and surface only when:
 
 - Red test fails to go green after 3 attempts on the same slice.
-- Any specialist review skill flags `critical` when consulted mid-slice (see below).
+- A mid-slice review returns a halting finding (see below).
 - Build / install / migration command exits non-zero and retrying with obvious fix fails.
 - Spec gap discovered — required behaviour is underspecified or the spec contradicts itself. Do not guess.
 - Any command asks for interactive input the loop cannot answer.
@@ -127,7 +127,7 @@ For risky slices, after green:
 - Invoke `/mattstack:review-lazy` on the slice diff.
 - Invoke `/mattstack:review-abstraction` on the slice diff.
 
-If either returns `critical` or a `net -N` where N exceeds the slice's added lines, halt.
+Halt if `/mattstack:review-abstraction` returns any `wrong-shape` or `defer`, or `/mattstack:review-lazy` returns a `net -N` where N is more than 20% of the slice's added lines. Fold any other findings into the refactor step and re-run the suite.
 
 ### End-of-run
 
