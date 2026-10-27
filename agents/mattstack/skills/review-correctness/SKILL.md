@@ -10,7 +10,7 @@ Find the inputs and states under which the diff does the wrong thing. A finding 
 
 ## Inputs
 
-Default: `git diff <merge-base>...HEAD`. User can supply a range or paste a diff. If not in a git repo, ask.
+Default: `git diff <merge-base>...HEAD`. User can supply a range or paste a diff. If not in a git repo, ask. When `/mattstack:review` passes a directory (a temp worktree for a PR or MR), read code and run git there.
 
 Read beyond the diff where the diff reaches: callers of changed functions, the types they pass, the state they share. A change that is correct in isolation can break a caller.
 
@@ -63,4 +63,4 @@ If nothing found: `correctness: no bugs found. Ship.`
 
 ## Boundaries
 
-Scope: behaviour that is wrong for some input or state. Not spec conformance (`/mattstack:review-spec`), not complexity (`/mattstack:review-lazy`, `/mattstack:review-abstraction`), not security (`/mattstack:review-security`) — a bug an attacker can exploit goes to review-security only. Style and naming are out of scope. Does not apply fixes; only lists them.
+Scope: behaviour that is wrong for some input or state. Not spec conformance (`/mattstack:review-spec`), not complexity (`/mattstack:review-lazy`, `/mattstack:review-abstraction`), not security (`/mattstack:review-security`), not performance (`/mattstack:review-performance`) — a bug an attacker can exploit goes to review-security only. Style and naming are out of scope. Does not apply fixes; only lists them.

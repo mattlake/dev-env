@@ -11,7 +11,11 @@ Compare a diff to a spec doc. One question per finding: does the code deliver wh
 ## Inputs
 
 1. **Spec path**: `~/.claude/specs/<repo>/<slug>.md` (or supplied by the user or by `/mattstack:review`).
-2. **Diff**: default is `git diff <merge-base>...HEAD`. If the user supplies a range, use it. If not in a git repo, ask.
+2. **Diff**: default is `git diff <merge-base>...HEAD`. If the user supplies a range, use it. If not in a git repo, ask. When `/mattstack:review` passes a directory (a temp worktree for a PR or MR), read code and run git there.
+
+### Intent instead of a spec
+
+For a PR or MR with no mattstack spec, `/mattstack:review` passes a file headed `# Intent from <PR|MR> <n> (not a spec)`: the title, description and linked issues. Treat each concrete, testable claim in it as a behaviour and number them B1, B2, … in the order they appear. Report `missing` and `partial` only against explicit claims, never against what the author probably meant. Vague claims ("improves performance", "cleans up") are not behaviours; list them once as `undertested minor: intent too vague to check`. Start the end line with `spec (intent from <PR|MR> <n>):` instead of `spec:`.
 
 If the spec is missing, stop and tell the user.
 
@@ -59,4 +63,4 @@ If zero findings at any severity: `spec: matches. <N>/<N> behaviours covered. Sh
 
 ## Boundaries
 
-Scope: spec conformance only. Bugs unrelated to the spec, security holes, and performance are out of scope — those belong to `/mattstack:review-correctness` and `/mattstack:review-security`. Do not apply fixes; only list them.
+Scope: spec conformance only. Bugs unrelated to the spec, security holes, and performance are out of scope — those belong to `/mattstack:review-correctness`, `/mattstack:review-security` and `/mattstack:review-performance`. Do not apply fixes; only list them.

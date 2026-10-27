@@ -2,7 +2,7 @@
 
 Opinionated dev workflow for Claude Code, shipped as a plugin.
 
-Flow: **grill** a plan → cut a **spec** → drive **TDD** AFK → **verify** it runs → **review** the diff for spec conformance, bugs, security, laziness, and abstraction cost. `/mattstack:run` drives the whole chain and keeps resumable state.
+Flow: **grill** a plan → cut a **spec** → drive **TDD** AFK → **verify** it runs → **review** the diff for spec conformance, bugs, security, performance, laziness, and abstraction cost. `/mattstack:run` drives the whole chain and keeps resumable state.
 
 Self-contained — no other plugins required.
 
@@ -25,10 +25,11 @@ Skills appear under `/mattstack:*`.
 | `/mattstack:spec` | Turns a grill session (or freeform notes) into a spec doc. |
 | `/mattstack:tdd-loop` | Splits a spec into ordered slices and drives red-green-refactor AFK. |
 | `/mattstack:verify` | Runs build/typecheck/lint, then exercises each spec behaviour in the running app. Halts on any failure. |
-| `/mattstack:review` | Fans out to the five specialist reviewers in parallel and aggregates. |
+| `/mattstack:review` | Fans out to the six specialist reviewers in parallel and aggregates. Takes the current branch, a range, a branch name, or a GitHub PR / GitLab MR link. |
 | `/mattstack:review-spec` | Diff vs spec doc — does the code deliver what was specified? |
 | `/mattstack:review-correctness` | Bug hunt — every finding names the input or state that triggers it. |
 | `/mattstack:review-security` | Traces untrusted input from source to sink — injection, authz, secrets, exposure, deps. |
+| `/mattstack:review-performance` | Costs that grow with data — N+1, quadratic, unbounded, blocking, missing index. Names the scale. |
 | `/mattstack:review-lazy` | YAGNI / delete-first review, one line per finding. |
 | `/mattstack:review-abstraction` | Does each new abstraction earn its keep? |
 
@@ -69,6 +70,7 @@ Any skill is also usable standalone:
 
 ```
 /mattstack:review           # review current branch against merge-base
+/mattstack:review https://gitlab.example.com/team/app/-/merge_requests/42   # any PR or MR, local report only
 /mattstack:review-lazy      # only the delete-first pass
 /mattstack:grill            # stress-test any plan without proceeding to spec
 ```

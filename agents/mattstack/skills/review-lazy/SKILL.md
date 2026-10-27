@@ -56,7 +56,7 @@ Tags (same as ladder rungs):
 
 ## Inputs
 
-Default: `git diff <merge-base>...HEAD`. User can supply a range or paste a diff. If not in a git repo, ask.
+Default: `git diff <merge-base>...HEAD`. User can supply a range or paste a diff. If not in a git repo, ask. When `/mattstack:review` passes a directory (a temp worktree for a PR or MR), read code and run git there.
 
 ## Scoring
 
