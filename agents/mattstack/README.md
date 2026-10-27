@@ -2,7 +2,7 @@
 
 Opinionated dev workflow for Claude Code, shipped as a plugin.
 
-Flow: **grill** a plan → cut a **spec** → drive **TDD** AFK → **review** the diff against spec, laziness, and abstraction cost.
+Flow: **grill** a plan → cut a **spec** → drive **TDD** AFK → **review** the diff against spec, laziness, and abstraction cost. `/mattstack:run` drives the whole chain and keeps resumable state.
 
 Self-contained — no other plugins required.
 
@@ -20,6 +20,7 @@ Skills appear under `/mattstack:*`.
 
 | Skill | Purpose |
 |---|---|
+| `/mattstack:run` | Drives one item through grill → spec → tdd-loop → review; state in `~/.claude/specs/<repo>/`, resumable. |
 | `/mattstack:grill` | Socratic interview that surfaces every open decision behind a plan. |
 | `/mattstack:spec` | Turns a grill session (or freeform notes) into a spec doc. |
 | `/mattstack:tdd-loop` | Splits a spec into ordered slices and drives red-green-refactor AFK. |
@@ -51,6 +52,14 @@ Adding a new feature — "session timeout after 15 minutes of inactivity":
    → At end, runs /mattstack:review and prints the aggregated report.
 
 4. Eyeball the diff. Merge or push back to grill.
+```
+
+Or let `/mattstack:run` sequence the steps above:
+
+```
+/mattstack:run session timeout after 15 minutes idle   # new item, local branch session-timeout
+/mattstack:run                                         # list items in flight, pick one
+/mattstack:run session-timeout                         # resume after a halt
 ```
 
 Any skill is also usable standalone:
