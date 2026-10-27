@@ -70,6 +70,6 @@ If nothing to cut: `lazy: lean already. Ship.` and stop.
 
 ## Boundaries
 
-Scope: over-engineering and complexity only. Correctness bugs, security holes, and performance are explicitly out of scope — route those to a normal review pass or the appropriate specialist skill. A single smoke test or `assert`-based self-check is the minimum, not bloat — never flag it for deletion. Does not apply fixes; only lists them.
+Scope: over-engineering and complexity only. Correctness bugs, security holes, and performance are explicitly out of scope — those belong to `/mattstack:review-correctness` and `/mattstack:review-security`. A single smoke test or `assert`-based self-check is the minimum, not bloat — never flag it for deletion. Does not apply fixes; only lists them.
 
 Before resting a finding on a claim about performance, allocation, or how a tool or library behaves, check it: run a benchmark, `-gcflags=-m`, a quick script, or read the source. If you can't check it, label the finding `(unverified)`. A reason that turns out false is worse than no reason.

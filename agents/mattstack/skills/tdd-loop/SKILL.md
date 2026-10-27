@@ -126,8 +126,9 @@ For risky slices, after green:
 
 - Invoke `/mattstack:review-lazy` on the slice diff.
 - Invoke `/mattstack:review-abstraction` on the slice diff.
+- If the slice touches a security-sensitive path, invoke `/mattstack:review-security` on the slice diff.
 
-Halt if `/mattstack:review-abstraction` returns any `wrong-shape` or `defer`, or `/mattstack:review-lazy` returns a `net -N` where N is more than 20% of the slice's added lines. Fold any other findings into the refactor step and re-run the suite.
+Halt if `/mattstack:review-security` returns any `critical`, `/mattstack:review-abstraction` returns any `wrong-shape` or `defer`, or `/mattstack:review-lazy` returns a `net -N` where N is more than 20% of the slice's added lines. Fold any other findings into the refactor step and re-run the suite.
 
 ### End-of-run
 
