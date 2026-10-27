@@ -40,10 +40,10 @@ Adding a new feature — "session timeout after 15 minutes of inactivity":
 
 2. /mattstack:spec
    → Consumes the digest.
-   → Writes ./specs/session-timeout.md
+   → Writes ~/.claude/specs/<repo>/session-timeout.md
    → Prints: "Spec written. Behaviours: 4. Open questions: 0."
 
-3. /mattstack:tdd-loop ./specs/session-timeout.md
+3. /mattstack:tdd-loop ~/.claude/specs/<repo>/session-timeout.md
    → Splits into ordered slices, prints the plan.
    → Wait for "go".
    → Drives red-green-refactor per slice, AFK.
