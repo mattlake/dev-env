@@ -65,4 +65,5 @@ link_shared() {
     link shared/git/.gitconfig            "$HOME/.gitconfig"
     link shared/git/ignore                "$HOME/.config/git/ignore"
     link agents/mattstack                 "$HOME/.claude/skills/mattstack"
+    link agents/boardstack                "$HOME/.claude/skills/boardstack"
 }

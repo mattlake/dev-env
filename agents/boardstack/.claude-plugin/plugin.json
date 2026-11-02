@@ -1,0 +1,8 @@
+{
+  "name": "boardstack",
+  "description": "Beta. A vendor-neutral take on super-board: a local ticket board drained in small batches. Each ticket is grilled at pickup, then built, verified and reviewed unattended with mattstack skills, and handed off for peer review. Anywhere super-board would call GitHub, it asks you instead.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Matt"
+  }
+}
