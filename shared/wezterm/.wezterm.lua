@@ -128,6 +128,8 @@ config.keys = {
     -- ========================================================================
     { key = "c",        mods = "CMD",        action = act.CopyTo("ClipboardAndPrimarySelection") },
     { key = "v",        mods = "CMD",        action = act.PasteFrom("Clipboard") },
+    { key = "c",        mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+    { key = "v",        mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
 
     -- Copy mode with leader key (v ≈ vim visual mode)
     { key = "v",        mods = "LEADER",     action = act.ActivateCopyMode },
